@@ -38,4 +38,4 @@ jobs:
     - run: echo -e "Host static\n\tUser angular\n\tHostname 173.249.36.58\n\tIdentityFile ~/.ssh/github-action\n\tStrictHostKeyChecking No" >> ~/.ssh/config
     - run: ssh static "rm -rf ~/dist && mkdir ~/dist"
     - run: ls dist
-    - run: rsync -e ssh dist static:/home/angular/dist
+    - run: rsync -r -e ssh dist static:/home/angular/dist
