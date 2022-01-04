@@ -30,10 +30,11 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+    - run: ls dist
     - run: mkdir ~/.ssh
     - run: 'echo "$SSH_KEY" >> ~/.ssh/github-action'
     - run: 'cat ~/.ssh/github-action'
     - run: chmod 400 ~/.ssh/github-action
     - run: echo -e "Host static\n\tUser angular\n\tHostname 173.249.36.58\n\tIdentityFile ~/.ssh/github-action\n\tStrictHostKeyChecking No" >> ~/.ssh/config
-    - run: ssh static "rm -rf ~/dist"
-    - run: rsync -e ssh dist static:~/dist
+    - run: ssh static "rm -rf ~/dist && mkdir ~/dist"
+    - run: rsync -e ssh dist/ static:~/dist
